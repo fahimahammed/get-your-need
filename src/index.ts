@@ -6,7 +6,8 @@ import express from 'express';
 import http from 'http';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import Product from './dbConfig/db.js'
+import {typeDefs} from './gql/schema/schema.js'
+import { resolvers } from './gql/resolvers/resolvers.js';
 
 interface MyContext {
   token?: string;
@@ -18,39 +19,6 @@ const app = express();
 // Below, we tell Apollo Server to "drain" this httpServer,
 // enabling our servers to shut down gracefully.
 const httpServer = http.createServer(app);
-
-const typeDefs = `#graphql
-  type Query {
-    hello: String
-    products: [Product]
-    product(productId: ID): Product
-  }
-  type Product {
-    id: ID
-    name: String
-    description: String
-    quantity: Int
-    price: Float
-    image: String
-    onSale: Boolean
-    categoryId: String
-  }
-`;
-
-const resolvers = {
-    Query: {
-      hello: () => 'world',
-      products: async()=>{
-        const result = await Product.find({});
-        return result;
-      },
-      product: async(parent:any, {productId}, context:any)=>{
-        const result = await Product.findById(productId)
-        return result;
-      }
-    },
-  };
-
 
 // Same ApolloServer initialization as before, plus the drain plugin
 // for our httpServer.
@@ -65,7 +33,7 @@ await server.start();
 // Set up our Express middleware to handle CORS, body parsing,
 // and our expressMiddleware function.
 app.use(
-  '/',
+  '/graphql',
   cors<cors.CorsRequest>(),
   bodyParser.json(),
   // expressMiddleware accepts the same arguments:
@@ -77,4 +45,4 @@ app.use(
 
 // Modified server startup
 await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
-console.log(`🚀 Server ready at http://localhost:4000/`);
+console.log(`🚀 Server ready at http://localhost:4000/graphql/`);
