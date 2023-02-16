@@ -4,7 +4,7 @@ import { productSchema } from './dbSchema/productSchema.js';
 
 
 // 3. Create a Model.
-export const Product = model<IProduct>('products', productSchema);
+const Product = model<IProduct>('products', productSchema);
 
 run().catch(err => console.log(err));
 
@@ -24,4 +24,4 @@ async function run() {
 //   console.log(user); // 'bill@initech.com'
 }
 
-// export default Product;
+export default Product;

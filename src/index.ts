@@ -6,7 +6,7 @@ import express from 'express';
 import http from 'http';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import {Product} from './dbConfig/db.js'
+import Product from './dbConfig/db.js'
 
 interface MyContext {
   token?: string;
