@@ -33,6 +33,8 @@ export const typeDefs = `#graphql
 
   type Mutation {
     addProduct(data: productData!): Product
+    deleteProduct(productId: ID!): Boolean
+    updateProduct(productId: ID!, data: productData!): Boolean
   }
 
   input productData {

@@ -40,6 +40,22 @@ export const resolvers = {
         const productData = new Product(args.data);
         const postProduct = await productData.save();
         return postProduct;
-      }
+      },
+      deleteProduct: async(parent:any, args:any, context:any)=>{
+        const deleteData = await Product.findByIdAndDelete(args.productId)
+        if(deleteData){
+          return true;
+        }else{
+          return false;
+        }
+      },
+      updateProduct: async(parent:any, args:any, context:any)=>{
+        const updateData = await Product.findOneAndUpdate(args.productId, args.data);
+        if(updateData){
+          return true;
+        }else{
+          return false;
+        }
+      } 
     }
   };
