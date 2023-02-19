@@ -1,10 +1,16 @@
 import { model, connect } from 'mongoose';
 import { IProduct } from './interface/IProduct';
 import { productSchema } from './dbSchema/productSchema.js';
+import { ICategory } from './interface/ICategory';
+import { categorySchema } from './dbSchema/categorySchema.js';
+import { IReview } from './interface/IReview';
+import { reviewSchema } from './dbSchema/reviewSchema.js';
 
 
 // 1. Create a Model.
-const Product = model<IProduct>('products', productSchema);
+export const Product = model<IProduct>('products', productSchema);
+export const Category = model<ICategory>('categories', categorySchema);
+export const Review = model<IReview>('reviews', reviewSchema);
 
 run().catch(err => console.log(err));
 
@@ -13,4 +19,7 @@ async function run() {
   await connect('mongodb://127.0.0.1:27017/e-commerce');
 }
 
-export default Product;
+// export default {
+//   Product,
+//   Category
+// };

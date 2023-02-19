@@ -1,4 +1,4 @@
-import Product from "../../dbConfig/db.js";
+import {Product, Category, Review} from "../../dbConfig/db.js";
 
 export const resolvers = {
     Query: {
@@ -8,7 +8,19 @@ export const resolvers = {
         return result;
       },
       product: async(parent:any, {productId}, context:any)=>{
-        const result = await Product.findById(productId)
+        const result = await Product.findOne({id: productId})
+        return result;
+      },
+      categories: async()=>{
+        const result = await Category.find({});
+        return result;
+      },
+      category: async(parent, {categoryId}, context)=>{
+        const result = await Category.findOne({id: categoryId});
+        return result;
+      },
+      reviews: async()=>{
+        const result = await Review.find({});
         return result;
       }
     },
