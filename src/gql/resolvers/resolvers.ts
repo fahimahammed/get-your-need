@@ -15,7 +15,7 @@ export const resolvers = {
         const result = await Category.find({});
         return result;
       },
-      category: async(parent, {categoryId}, context)=>{
+      category: async(parent:any, {categoryId}, context:any)=>{
         const result = await Category.findOne({id: categoryId});
         return result;
       },
@@ -24,4 +24,14 @@ export const resolvers = {
         return result;
       }
     },
+    Product: {
+      category: async(parent:any, args:any, context:any)=>{
+        const result = await Category.findOne({categoryId: parent.id});
+        return result;
+      },
+      reviews: async(parent, args:Object, context:any)=>{
+        const result = await Review.find({productId: parent.id});
+        return result;
+      }
+    }
   };

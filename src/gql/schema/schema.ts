@@ -16,6 +16,8 @@ export const typeDefs = `#graphql
     image: String
     onSale: Boolean
     categoryId: String
+    category: Category
+    reviews: [Review]
   }
   type Category{
     id: String,
