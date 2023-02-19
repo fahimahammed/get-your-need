@@ -8,7 +8,7 @@ export const resolvers = {
         return result;
       },
       product: async(parent:any, {productId}, context:any)=>{
-        const result = await Product.findOne({id: productId})
+        const result = await Product.findOne({_id: productId})
         return result;
       },
       categories: async()=>{
@@ -16,7 +16,7 @@ export const resolvers = {
         return result;
       },
       category: async(parent:any, {categoryId}, context:any)=>{
-        const result = await Category.findOne({id: categoryId});
+        const result = await Category.findOne({_id: categoryId});
         return result;
       },
       reviews: async()=>{
@@ -29,9 +29,17 @@ export const resolvers = {
         const result = await Category.findOne({categoryId: parent.id});
         return result;
       },
-      reviews: async(parent, args:Object, context:any)=>{
-        const result = await Review.find({productId: parent.id});
+      reviews: async(parent:any, args:any, context:any)=>{
+        const result = await Review.find({productId: parent._id});
         return result;
+      }
+    },
+
+    Mutation: {
+      addProduct: async(parent:any, args:any, context:any)=>{
+        const productData = new Product(args.data);
+        const postProduct = await productData.save();
+        return postProduct;
       }
     }
   };

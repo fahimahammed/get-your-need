@@ -1,6 +1,5 @@
 // 1. Create an interface representing a document in MongoDB.
 export interface IProduct {
-    id: string,
     name: string,
     description: string,
     quantity: number,

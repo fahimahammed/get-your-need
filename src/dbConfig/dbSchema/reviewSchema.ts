@@ -2,7 +2,7 @@
 import { Schema } from "mongoose";
 import { IReview } from "../interface/IReview";
 export const reviewSchema = new Schema<IReview>({
-    id: {
+    _id: {
         type: String,
         required: true
     },

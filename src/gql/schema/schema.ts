@@ -8,7 +8,7 @@ export const typeDefs = `#graphql
     reviews: [Review]
   }
   type Product {
-    id: ID
+    _id: ID
     name: String
     description: String
     quantity: Int
@@ -20,14 +20,28 @@ export const typeDefs = `#graphql
     reviews: [Review]
   }
   type Category{
-    id: String,
+    _id: ID,
     name: String
   }
   type Review{
-    id: ID
+    _id: ID
     title: String
     comment: String
     rating: Int
     productId: ID
+  }
+
+  type Mutation {
+    addProduct(data: productData!): Product
+  }
+
+  input productData {
+    name: String
+    description: String
+    quantity: Int
+    price: Float
+    image: String
+    onSale: Boolean
+    categoryId: String
   }
 `;
