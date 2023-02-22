@@ -35,6 +35,30 @@ export const typeDefs = `#graphql
     addProduct(data: productData!): Product
     deleteProduct(productId: ID!): Boolean
     updateProduct(productId: ID!, data: productData!): Boolean
+    signup(data: SignInInfo!): User
+    login(data: LoginInfo!): AuthPayLoad
+  }
+
+  type User{
+    _id: ID
+    name: String
+    email: String
+  }
+
+  type AuthPayLoad{
+    user: User
+    token: String
+  }
+
+  input LoginInfo{
+    email: String
+    password: String
+  }
+
+  input SignInInfo{
+    name: String,
+    email: String
+    password: String
   }
 
   input productData {
