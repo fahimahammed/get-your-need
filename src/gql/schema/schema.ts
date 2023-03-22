@@ -43,6 +43,7 @@ export const typeDefs = `#graphql
     _id: ID
     name: String
     email: String
+    role: String
   }
 
   type AuthPayLoad{
@@ -56,9 +57,10 @@ export const typeDefs = `#graphql
   }
 
   input SignInInfo{
-    name: String,
+    name: String
     email: String
     password: String
+    role: String
   }
 
   input productData {

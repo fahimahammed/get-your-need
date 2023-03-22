@@ -25,6 +25,10 @@ const httpServer = http.createServer(app);
 const server = new ApolloServer<MyContext>({
   typeDefs,
   resolvers,
+  // context: ({req}) => {
+  //   console.log(req);
+  //   retrun "hello";
+  // },
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });
 // Ensure we wait for our server to start
@@ -39,7 +43,7 @@ app.use(
   // expressMiddleware accepts the same arguments:
   // an Apollo Server instance and optional configuration options
   expressMiddleware(server, {
-    context: async ({ req }) => ({ token: req.headers.token }),
+    context: async ({ req }) => ({ token: req.headers.authorization }),
   }),
 );
 
